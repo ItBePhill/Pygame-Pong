@@ -3,6 +3,7 @@ import pygame as pg
 pg.init()
 #list of lists of surface and coordinate
 obj = []
+delta = 1
 class player(object):
     def __init__(self, x, y, width, height, colour):
         self.x = x
@@ -20,7 +21,7 @@ p2: player = None
 window = pg.display.set_mode([800, 600])
 
 def drawScreen(obj):
-    print(obj)
+    # print(obj)
     window.fill([0,0,0])
     for i in obj:
         i.draw(i)
@@ -45,19 +46,19 @@ while running:
     for i in pg.event.get():
         if i.type == pg.QUIT:
             running = False
-    keys =  pg.key.get_pressed()
+    keys = pg.key.get_pressed()
     if keys[pg.K_w]:
-        p1.y -= 3
+        p1.y -= 300 * delta
     if keys[pg.K_s]:
-        p1.y += 3
-    
+        p1.y += 300 * delta
     if keys[pg.K_UP]:
-        p2.y -= 3
+        p2.y -= 300 * delta
     if keys[pg.K_DOWN]:
-        p2.y += 3
+        p2.y += 300 * delta
 
 
     drawScreen(obj)
-    clock.tick(60)
+    delta = clock.tick(500)/1000
+    print(clock.get_fps())
 
 pg.quit()
